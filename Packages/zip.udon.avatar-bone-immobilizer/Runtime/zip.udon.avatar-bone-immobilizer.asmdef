@@ -1,0 +1,16 @@
+{
+    "name": "zip.udon.avatar-bone-immobilizer",
+    "rootNamespace": "Tatamo.AvatarBoneImmobilizer",
+    "references": [
+        "nadena.dev.modular-avatar.core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

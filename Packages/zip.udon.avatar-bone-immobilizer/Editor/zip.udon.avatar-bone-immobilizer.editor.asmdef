@@ -1,0 +1,20 @@
+{
+    "name": "zip.udon.avatar-bone-immobilizer.editor",
+    "rootNamespace": "Tatamo.AvatarBoneImmobilizer.Editor",
+    "references": [
+        "nadena.dev.ndmf",
+        "nadena.dev.modular-avatar.core",
+        "zip.udon.avatar-bone-immobilizer"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

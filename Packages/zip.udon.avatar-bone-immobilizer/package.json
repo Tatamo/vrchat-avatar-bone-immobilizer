@@ -1,0 +1,13 @@
+{
+  "name": "zip.udon.avatar-bone-immobilizer",
+  "displayName": "Avatar Bone Immobilizer",
+  "version": "0.0.1",
+  "unity": "2022.3",
+  "description": "NDMF Plugin to avoid tracking of humanoid bone",
+  "vrchatVersion": "2022.1.1",
+  "author": {
+    "name": "Tatamo",
+    "email": "nsorder@gmail.com",
+    "url": "https://github.com/Tatamo/vrchat-avatar-bone-immobilizer"
+  }
+}
