@@ -37,6 +37,7 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor
                         }
 
                         var entries = new List<(ImmobilizeBones.BoneEntry entry, Transform dummyBone)>();
+                        var targetPaths = new List<string>();
                         foreach (var entry in pluginComponent.targetBones)
                         {
                             var reference = entry.targetBone;
@@ -44,7 +45,8 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor
                             var targetObject = reference.Get(pluginComponent);
                             if (targetObject == null)
                             {
-                                Debug.Log($"Skip: ImmobilizeBones target GameObject {reference.referencePath} not found");
+                                Debug.Log(
+                                    $"Skip: ImmobilizeBones target GameObject {reference.referencePath} not found");
                                 continue;
                             }
 
@@ -59,6 +61,7 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor
 
                             var dummy = CreateDummyBone(parent, target, target.name);
                             entries.Add((entry, dummy));
+                            targetPaths.Add(GetRelativePath(ctx.AvatarRootTransform, target));
                         }
 
                         if (entries.Count == 0) continue;
@@ -95,19 +98,18 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor
                                 break;
                         }
 
-                        if (pluginComponent.rotationSource != ImmobilizeBones.RotationSource.UseCurrent)
-                        {
-                            var controller = CreateRotateAnimationAndAnimatorController.CreateAnimatorController(boneRotations,
-                                $"ImmobilizeBones_{pluginComponent.gameObject.name}_{pluginComponent.GetInstanceID()}");
-                            var mergeAnimator = pluginComponent.gameObject.AddComponent<ModularAvatarMergeAnimator>();
-                            mergeAnimator.animator = controller;
-                            mergeAnimator.layerType = VRCAvatarDescriptor.AnimLayerType.FX;
-                            mergeAnimator.deleteAttachedAnimator = false;
-                            mergeAnimator.pathMode = MergeAnimatorPathMode.Absolute;
-                            mergeAnimator.matchAvatarWriteDefaults = true;
-                            mergeAnimator.layerPriority = 0;
-                            mergeAnimator.mergeAnimatorMode = MergeAnimatorMode.Append;
-                        }
+                        var controller = CreateRotateAnimationAndAnimatorController.CreateAnimatorController(
+                            targetPaths, boneRotations,
+                            $"ImmobilizeBones_{pluginComponent.gameObject.name}_{pluginComponent.GetInstanceID()}",
+                            pluginComponent.parameterName, pluginComponent.immobilizeWhenParamTrue);
+                        var mergeAnimator = pluginComponent.gameObject.AddComponent<ModularAvatarMergeAnimator>();
+                        mergeAnimator.animator = controller;
+                        mergeAnimator.layerType = VRCAvatarDescriptor.AnimLayerType.FX;
+                        mergeAnimator.deleteAttachedAnimator = false;
+                        mergeAnimator.pathMode = MergeAnimatorPathMode.Absolute;
+                        mergeAnimator.matchAvatarWriteDefaults = true;
+                        mergeAnimator.layerPriority = 0;
+                        mergeAnimator.mergeAnimatorMode = MergeAnimatorMode.Append;
 
                         Object.DestroyImmediate(pluginComponent);
                     }

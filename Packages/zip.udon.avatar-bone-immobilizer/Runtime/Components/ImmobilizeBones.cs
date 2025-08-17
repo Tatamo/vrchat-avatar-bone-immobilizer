@@ -29,7 +29,7 @@ namespace Tatamo.AvatarBoneImmobilizer.Components
         public AnimationClip? clip;
         public int clipFrame = 0;
 
-        public string parameterName = "";
+        public string parameterName = "ImmobilizeBones";
         public bool immobilizeWhenParamTrue = true;
         
         public List<BoneEntry> targetBones = new();
