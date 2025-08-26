@@ -45,8 +45,7 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Transforming
                 }
 
                 if (entries.Count == 0) continue;
-                
-                
+
                 // Modify Animations
                 foreach (var (entry, dummy) in entries)
                 {
@@ -68,7 +67,7 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Transforming
                         new AnimationCurve(new Keyframe(0f, entry.rotation.w))
                     );
                 }
-                
+
                 foreach (var originalBonePath in targetPaths)
                 {
                     AnimationUtility.SetEditorCurve(data.clipLocked,
@@ -80,9 +79,9 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Transforming
                         new AnimationCurve(new Keyframe(0f, 0f))
                     );
                 }
-
             }
         }
+
         private static Transform CreateDummyBone(Transform parent, Transform source, string baseName)
         {
             string boneName = MakeUniqueChildName(parent, $"{baseName}.ImmobilizeSource");
@@ -104,6 +103,7 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Transforming
 
             return transform;
         }
+
         private static Transform? FindChildByName(Transform parent, string name)
         {
             for (int i = 0; i < parent.childCount; i++)
@@ -136,6 +136,5 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Transforming
 
             return string.Join("/", stack.ToArray());
         }
-
     }
 }

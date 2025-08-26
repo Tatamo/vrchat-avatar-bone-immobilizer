@@ -81,7 +81,6 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Resolving
 
                         break;
                 }
-                // UnityEngine.Object.DestroyImmediate(component);
             }
         }
     }
