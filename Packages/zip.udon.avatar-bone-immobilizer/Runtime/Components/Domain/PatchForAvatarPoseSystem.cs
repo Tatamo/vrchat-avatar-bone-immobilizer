@@ -2,8 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using nadena.dev.modular_avatar.core;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Tatamo.AvatarBoneImmobilizer.Components.Domain

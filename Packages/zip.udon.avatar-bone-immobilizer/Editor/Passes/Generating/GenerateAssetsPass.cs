@@ -22,8 +22,8 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Generating
                 data.clipLocked = new AnimationClip { name = name + "_Immobilize" };
                 data.clipUnlocked = new AnimationClip { name = name + "_Release" };
 
-                data.controller = new AnimatorController();
-                data.controller.AddParameter(new AnimatorControllerParameter
+                var controller = new AnimatorController();
+                controller.AddParameter(new AnimatorControllerParameter
                 {
                     name = data.parameterName,
                     type = AnimatorControllerParameterType.Bool,
@@ -66,7 +66,9 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Generating
                     data.immobilizeWhenParamTrue ? AnimatorConditionMode.If : AnimatorConditionMode.IfNot, 0f,
                     data.parameterName);
                 layer.stateMachine = stateMachine;
-                data.controller.AddLayer(layer);
+                controller.AddLayer(layer);
+
+                data.controller = controller;
 
                 var mergeAnimator = data.gameObject.AddComponent<ModularAvatarMergeAnimator>();
                 mergeAnimator.animator = data.controller;

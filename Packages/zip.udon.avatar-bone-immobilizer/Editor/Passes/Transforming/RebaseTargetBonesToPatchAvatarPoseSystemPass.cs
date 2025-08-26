@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using nadena.dev.modular_avatar.core;
 using Tatamo.AvatarBoneImmobilizer.Components.Domain;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Transforming
@@ -53,7 +54,8 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Transforming
                     var patchComponent = data.gameObject.AddComponent<PatchForAvatarPoseSystem>();
                     patchComponent.lockClipName = data.clipLocked!.name;
                     patchComponent.unlockClipName = data.clipUnlocked!.name;
-                    patchComponent.layerName = data.controller!.layers[0].name;
+                    var controller = (AnimatorController)data.controller!;
+                    patchComponent.layerName = controller.layers[0].name;
                     patchComponent.targets = patchTargets;
                 }
             }
