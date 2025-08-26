@@ -25,6 +25,8 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Transforming
             {
                 if (patch == null) continue;
                 var descriptor = avatarRootTransform.gameObject.GetComponent<VRCAvatarDescriptor>();
+                var lockClips = new List<AnimationClip>();
+                var unlockClips = new List<AnimationClip>();
                 foreach (var fx in descriptor.baseAnimationLayers)
                 {
                     if (fx.type != VRCAvatarDescriptor.AnimLayerType.FX) continue;
@@ -37,52 +39,55 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Transforming
                         {
                             if (childState.state.motion is AnimationClip clip)
                             {
-                                if (clip.name.Contains(patch.lockClipName))
-                                {
-                                    foreach (var target in patch.targets)
-                                    {
-                                        foreach (var binding in AnimationUtility.GetCurveBindings(clip))
-                                        {
-                                            if (binding.path !=
-                                                $"{target.path}/{target.name}_Const/{target.name}") continue;
-                                            var curve = AnimationUtility.GetEditorCurve(clip, binding);
-                                            var newBinding = new EditorCurveBinding
-                                            {
-                                                path = target.path,
-                                                type = binding.type,
-                                                propertyName = binding.propertyName,
-                                            };
-                                            AnimationUtility.SetEditorCurve(clip, binding, null);
-                                            AnimationUtility.SetEditorCurve(clip, newBinding, curve);
-                                            EditorUtility.SetDirty(clip);
-                                            AssetDatabase.SaveAssets();
-                                        }
-                                    }
-                                }
-
-                                if (clip.name.Contains(patch.unlockClipName))
-                                {
-                                    foreach (var target in patch.targets)
-                                    {
-                                        foreach (var binding in AnimationUtility.GetCurveBindings(clip))
-                                        {
-                                            if (binding.path !=
-                                                $"{target.path}/{target.name}_Const/{target.name}") continue;
-                                            var curve = AnimationUtility.GetEditorCurve(clip, binding);
-                                            var newBinding = new EditorCurveBinding
-                                            {
-                                                path = target.path,
-                                                type = binding.type,
-                                                propertyName = binding.propertyName,
-                                            };
-                                            AnimationUtility.SetEditorCurve(clip, binding, null);
-                                            AnimationUtility.SetEditorCurve(clip, newBinding, curve);
-                                            EditorUtility.SetDirty(clip);
-                                            AssetDatabase.SaveAssets();
-                                        }
-                                    }
-                                }
+                                if (clip.name.Contains(patch.lockClipName)) lockClips.Add(clip);
+                                if (clip.name.Contains(patch.unlockClipName)) unlockClips.Add(clip);
                             }
+                        }
+                    }
+                }
+
+                foreach (var clip in lockClips)
+                {
+                    foreach (var target in patch.targets)
+                    {
+                        foreach (var binding in AnimationUtility.GetCurveBindings(clip))
+                        {
+                            if (binding.path !=
+                                $"{target.path}/{target.name}_Const/{target.name}") continue;
+                            var curve = AnimationUtility.GetEditorCurve(clip, binding);
+                            var newBinding = new EditorCurveBinding
+                            {
+                                path = target.path,
+                                type = binding.type,
+                                propertyName = binding.propertyName,
+                            };
+                            AnimationUtility.SetEditorCurve(clip, binding, null);
+                            AnimationUtility.SetEditorCurve(clip, newBinding, curve);
+                            EditorUtility.SetDirty(clip);
+                            AssetDatabase.SaveAssets();
+                        }
+                    }
+                }
+
+                foreach (var clip in unlockClips)
+                {
+                    foreach (var target in patch.targets)
+                    {
+                        foreach (var binding in AnimationUtility.GetCurveBindings(clip))
+                        {
+                            if (binding.path !=
+                                $"{target.path}/{target.name}_Const/{target.name}") continue;
+                            var curve = AnimationUtility.GetEditorCurve(clip, binding);
+                            var newBinding = new EditorCurveBinding
+                            {
+                                path = target.path,
+                                type = binding.type,
+                                propertyName = binding.propertyName,
+                            };
+                            AnimationUtility.SetEditorCurve(clip, binding, null);
+                            AnimationUtility.SetEditorCurve(clip, newBinding, curve);
+                            EditorUtility.SetDirty(clip);
+                            AssetDatabase.SaveAssets();
                         }
                     }
                 }
