@@ -9,5 +9,7 @@
     "name": "Tatamo",
     "email": "nsorder@gmail.com",
     "url": "https://github.com/Tatamo/vrchat-avatar-bone-immobilizer"
-  }
+  },
+  "license": "MIT",
+  "changelogUrl": "https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/blob/main/CHANGELOG.md"
 }
