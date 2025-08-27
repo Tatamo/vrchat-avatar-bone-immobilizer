@@ -15,9 +15,7 @@ VRChatアバターのHumanoidボーンの関節を固定し、トラッキング
 そのためのボーンやコンポーネントの作成、角度の設定を手軽に行えるような非破壊コンポーネントを提供し、配布アセットに利用できる形にしたものが本プラグインです。
 
 ## インストール
-[WIP] 注意：VCC登録用のVPMリポジトリURLは暫定的なもののため、近い将来に変更される可能性があります。
-
-`https://Tatamo.github.io/vrchat-avatar-bone-immobilizer/index.json` をVCCに登録して、パッケージ管理からアバタープロジェクトにインポートしてください。
+`https://vpm.udon.zip/index.json` をVCCに登録して、パッケージ管理からAvatar Bone Immobilizerをアバタープロジェクトにインポートしてください。
 
 ## 使い方
 アバター内の任意の階層で `Tatamo > AvatarBoneImmobilizer > ImmobilizeBones` コンポーネントをGameObjectにアタッチしてください。

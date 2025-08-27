@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Use custom domain for VPM listing.
+
 ### Removed
 
 ## [1.0.0] - 2025-08-27
@@ -42,5 +44,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial Implementations.
 
+[1.0.1]: https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/compare/0.0.1...1.0.0
 [0.0.1]: https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/releases/tag/0.0.1
