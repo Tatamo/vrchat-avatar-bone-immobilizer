@@ -11,5 +11,10 @@
     "url": "https://github.com/Tatamo/vrchat-avatar-bone-immobilizer"
   },
   "license": "MIT",
-  "changelogUrl": "https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/blob/main/CHANGELOG.md"
+  "changelogUrl": "https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/blob/main/CHANGELOG.md",
+  "vpmDependencies": {
+    "com.vrchat.avatars": "^3.7.0",
+    "nadena.dev.ndmf": ">=1.8.0",
+    "nadena.dev.modular-avatar": ">=1.13.0"
+  }
 }

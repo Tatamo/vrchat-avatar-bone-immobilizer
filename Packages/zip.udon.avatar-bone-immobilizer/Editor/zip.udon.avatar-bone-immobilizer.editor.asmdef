@@ -2,6 +2,9 @@
     "name": "zip.udon.avatar-bone-immobilizer.editor",
     "rootNamespace": "Tatamo.AvatarBoneImmobilizer.Editor",
     "references": [
+        "VRC.SDK3A",
+        "VRC.SDKBase.Editor",
+        "VRC.SDKBase",
         "nadena.dev.ndmf",
         "nadena.dev.modular-avatar.core",
         "zip.udon.avatar-bone-immobilizer"

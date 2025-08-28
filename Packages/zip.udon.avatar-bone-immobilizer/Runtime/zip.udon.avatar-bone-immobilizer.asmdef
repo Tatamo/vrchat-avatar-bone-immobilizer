@@ -2,6 +2,7 @@
     "name": "zip.udon.avatar-bone-immobilizer",
     "rootNamespace": "Tatamo.AvatarBoneImmobilizer",
     "references": [
+        "VRC.SDKBase",
         "nadena.dev.modular-avatar.core"
     ],
     "includePlatforms": [],
