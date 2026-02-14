@@ -33,5 +33,7 @@ namespace Tatamo.AvatarBoneImmobilizer.Components
         public bool immobilizeWhenParamTrue = true;
         
         public List<BoneEntry> targetBones = new();
+
+        public bool enablePreview = true;
     }
 }

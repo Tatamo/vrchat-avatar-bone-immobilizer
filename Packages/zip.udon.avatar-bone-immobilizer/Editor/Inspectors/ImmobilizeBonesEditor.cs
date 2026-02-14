@@ -12,7 +12,8 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Inspectors
     public class ImmobilizeBonesEditor : UnityEditor.Editor
 
     {
-        SerializedProperty _rotationSource, _clip, _clipFrame, _parameterName, _immobilizeWhenParamTrue, _targetBones;
+        SerializedProperty _rotationSource, _clip, _clipFrame, _parameterName, _immobilizeWhenParamTrue, _targetBones,
+            _enablePreview;
 
         ReorderableList _list;
 
@@ -26,6 +27,7 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Inspectors
             _parameterName = serializedObject.FindProperty(nameof(ImmobilizeBones.parameterName));
             _immobilizeWhenParamTrue = serializedObject.FindProperty(nameof(ImmobilizeBones.immobilizeWhenParamTrue));
             _targetBones = serializedObject.FindProperty(nameof(ImmobilizeBones.targetBones));
+            _enablePreview = serializedObject.FindProperty(nameof(ImmobilizeBones.enablePreview));
 
             _list = new ReorderableList(serializedObject, _targetBones, draggable: true, displayHeader: true,
                 displayAddButton: true, displayRemoveButton: true);
@@ -140,6 +142,9 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Inspectors
                     if (GUILayout.Button("Capture All (Current Pose)", GUILayout.Width(220))) CaptureAllEuler();
                 }
             }
+
+            EditorGUILayout.Space(6);
+            EditorGUILayout.PropertyField(_enablePreview, new GUIContent("Enable Preview"));
 
             DrawValidation();
             EditorGUIUtility.labelWidth = originalLabelWidth;

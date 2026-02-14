@@ -7,6 +7,7 @@ using Tatamo.AvatarBoneImmobilizer.Editor;
 using Tatamo.AvatarBoneImmobilizer.Editor.Passses.Generating;
 using Tatamo.AvatarBoneImmobilizer.Editor.Passses.Resolving;
 using Tatamo.AvatarBoneImmobilizer.Editor.Passses.Transforming;
+using Tatamo.AvatarBoneImmobilizer.Editor.Preview;
 using Object = UnityEngine.Object;
 
 [assembly: ExportsPlugin(typeof(BoneImmobilizerPlugin))]
@@ -31,7 +32,8 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor
                         {
                             Object.DestroyImmediate(component);
                         }
-                    });
+                    })
+                .PreviewingWith(new ImmobilizeBonesPreview());
             InPhase(BuildPhase.Generating)
                 .BeforePlugin("nadena.dev.modular-avatar")
                 .Run("Generate Animator for later use and MA Component",

@@ -9,9 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Enable Preview checkbox.
+
 ### Fixed
 
 ### Changed
+
 - Make `ImmobilizeBonesEditor.CaptureEuler` and `CaptureAllEuler` public for external use.
 
 ### Removed
