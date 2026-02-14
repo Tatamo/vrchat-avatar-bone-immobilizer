@@ -182,16 +182,8 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Inspectors
 
         public void CaptureEuler(int index)
         {
-            if (index < 0 || index >= TargetComponent.targetBones.Count) return;
-
-            var entry = TargetComponent.targetBones[index];
-            if (entry.targetBone == null) return;
-
-            var targetBone = entry.targetBone.Get(TargetComponent);
-            if (targetBone == null) return;
-
             Undo.RecordObject(TargetComponent, "Capture Euler");
-            entry.euler = targetBone.transform.localEulerAngles;
+            TargetComponent.CaptureEuler(index);
             EditorUtility.SetDirty(TargetComponent);
             serializedObject.Update();
         }
@@ -199,15 +191,7 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Inspectors
         public void CaptureAllEuler()
         {
             Undo.RecordObject(TargetComponent, "Capture All Euler");
-            for (int i = 0; i < TargetComponent.targetBones.Count; i++)
-            {
-                var entry = TargetComponent.targetBones[i];
-                if (entry.targetBone == null) continue;
-                var targetBone = entry.targetBone.Get(TargetComponent);
-                if (targetBone == null) continue;
-                entry.euler = targetBone.transform.localEulerAngles;
-            }
-
+            TargetComponent.CaptureAllEuler();
             EditorUtility.SetDirty(TargetComponent);
             serializedObject.Update();
         }

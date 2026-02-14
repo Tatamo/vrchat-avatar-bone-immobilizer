@@ -35,5 +35,26 @@ namespace Tatamo.AvatarBoneImmobilizer.Components
         public List<BoneEntry> targetBones = new();
 
         public bool enablePreview = true;
+
+        public void CaptureEuler(int index)
+        {
+            if (index < 0 || index >= targetBones.Count) return;
+
+            var entry = targetBones[index];
+            if (entry.targetBone == null) return;
+
+            var targetObject = entry.targetBone.Get(this);
+            if (targetObject == null) return;
+
+            entry.euler = targetObject.transform.localEulerAngles;
+        }
+
+        public void CaptureAllEuler()
+        {
+            for (int i = 0; i < targetBones.Count; i++)
+            {
+                CaptureEuler(i);
+            }
+        }
     }
 }
