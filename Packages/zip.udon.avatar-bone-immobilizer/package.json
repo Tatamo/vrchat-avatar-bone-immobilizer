@@ -1,7 +1,7 @@
 {
   "name": "zip.udon.avatar-bone-immobilizer",
   "displayName": "Avatar Bone Immobilizer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "unity": "2022.3",
   "description": "Immobilize humanoid bone to avoid tracking",
   "vrchatVersion": "2022.1.1",
