@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+### Fixed
+
+### Changed
+
+### Removed
+
+## [1.1.0] - 2026-02-14
+
+### Added
+
 - Enable Preview checkbox.
 
 ### Fixed
@@ -58,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial Implementations.
 
+[1.1.0]: https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/compare/1.0.1...1.1.0
 [1.0.1]: https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/compare/0.0.1...1.0.0
 [0.0.1]: https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/releases/tag/0.0.1
