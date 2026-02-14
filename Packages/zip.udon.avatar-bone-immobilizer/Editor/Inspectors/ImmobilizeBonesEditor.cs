@@ -175,7 +175,7 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Inspectors
             serializedObject.Update();
         }
 
-        void CaptureEuler(int index)
+        public void CaptureEuler(int index)
         {
             if (index < 0 || index >= TargetComponent.targetBones.Count) return;
 
@@ -191,7 +191,7 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Inspectors
             serializedObject.Update();
         }
 
-        void CaptureAllEuler()
+        public void CaptureAllEuler()
         {
             Undo.RecordObject(TargetComponent, "Capture All Euler");
             for (int i = 0; i < TargetComponent.targetBones.Count; i++)
