@@ -1,6 +1,7 @@
 #nullable enable
 
 using System.Collections.Generic;
+using System.Linq;
 using nadena.dev.modular_avatar.core;
 using Tatamo.AvatarBoneImmobilizer.Components.Domain;
 using UnityEditor.Animations;
@@ -13,10 +14,11 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Generating
     {
         public static void Run(Transform avatarRootTransform, IEnumerable<ImmobilizeBonesData> domainObjects)
         {
-            foreach (var data in domainObjects)
-            {
-                if (data == null) continue;
+            var dataList = domainObjects.Where(d => d != null).ToList();
+            if (dataList.Count == 0) return;
 
+            foreach (var data in dataList)
+            {
                 var name = $"ImmobilizeBones_{data.gameObject.name}_{data.GetInstanceID()}";
                 // この時点では空のアニメーションクリップを作成しておく
                 data.clipLocked = new AnimationClip { name = name + "_Immobilize" };
@@ -79,6 +81,50 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor.Passses.Generating
                 mergeAnimator.layerPriority = 0;
                 mergeAnimator.mergeAnimatorMode = MergeAnimatorMode.Append;
             }
+
+            // グローバル無効化レイヤーの生成
+            CreateGlobalDisableLayer(avatarRootTransform);
+        }
+
+        private static void CreateGlobalDisableLayer(Transform avatarRootTransform)
+        {
+            var globalName = "BoneImmobilizer_GlobalDisable";
+
+            var go = new GameObject(globalName);
+            go.transform.SetParent(avatarRootTransform, worldPositionStays: false);
+
+            var globalData = go.AddComponent<GlobalDisableData>();
+            globalData.disableClip = new AnimationClip { name = globalName + "_Disable" };
+
+            var controller = new AnimatorController();
+            var layer = new AnimatorControllerLayer
+            {
+                name = globalName,
+                blendingMode = AnimatorLayerBlendingMode.Override,
+                defaultWeight = 1f,
+            };
+            var stateMachine = new AnimatorStateMachine();
+            var disableState = new AnimatorState
+            {
+                motion = globalData.disableClip,
+                name = globalName + "_Disable",
+                writeDefaultValues = false
+            };
+            stateMachine.AddState(disableState, new Vector3(300, 0, 0));
+            stateMachine.defaultState = disableState;
+            layer.stateMachine = stateMachine;
+            controller.AddLayer(layer);
+
+            globalData.controller = controller;
+
+            var mergeAnimator = go.AddComponent<ModularAvatarMergeAnimator>();
+            mergeAnimator.animator = globalData.controller;
+            mergeAnimator.layerType = VRCAvatarDescriptor.AnimLayerType.FX;
+            mergeAnimator.deleteAttachedAnimator = false;
+            mergeAnimator.pathMode = MergeAnimatorPathMode.Absolute;
+            mergeAnimator.matchAvatarWriteDefaults = true;
+            mergeAnimator.layerPriority = -1;
+            mergeAnimator.mergeAnimatorMode = MergeAnimatorMode.Append;
         }
     }
 }

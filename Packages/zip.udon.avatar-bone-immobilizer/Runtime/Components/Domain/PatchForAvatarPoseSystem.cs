@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 
 using System;
 using System.Collections.Generic;
@@ -18,6 +18,7 @@ namespace Tatamo.AvatarBoneImmobilizer.Components.Domain
         public List<FixTarget> targets = new();
         public string layerName;
         public string lockClipName;
-        public string unlockClipName;
+        public string? unlockClipName;
+        public string? disableClipName;
     }
 }

@@ -46,13 +46,23 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor
                 .BeforePlugin("nadena.dev.modular-avatar")
                 .Run("Attach dummy bones and update animation clips", ctx =>
                 {
+                    var globalDisableData =
+                        ctx.AvatarRootObject.GetComponentInChildren<GlobalDisableData>();
                     RebaseTargetBonesToPatchAvatarPoseSystemPass.Run(ctx.AvatarRootTransform,
-                        ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBonesData>());
+                        ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBonesData>(),
+                        globalDisableData);
                     ApplyChangesPass.Run(ctx.AvatarRootTransform,
-                        ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBonesData>());
-                    foreach (var dataComponent in ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBonesData>())
+                        ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBonesData>(),
+                        globalDisableData);
+                    foreach (var dataComponent in ctx.AvatarRootObject
+                                 .GetComponentsInChildren<ImmobilizeBonesData>())
                     {
                         Object.DestroyImmediate(dataComponent);
+                    }
+
+                    if (globalDisableData != null)
+                    {
+                        Object.DestroyImmediate(globalDisableData);
                     }
                 });
             InPhase(BuildPhase.Transforming)
@@ -61,7 +71,8 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor
                 {
                     RebaseAnimationsPathToPatchAvatarPoseSystemPass.Run(ctx.AvatarRootTransform,
                         ctx.AvatarRootObject.GetComponentsInChildren<PatchForAvatarPoseSystem>());
-                    foreach (var component in ctx.AvatarRootObject.GetComponentsInChildren<PatchForAvatarPoseSystem>())
+                    foreach (var component in ctx.AvatarRootObject
+                                 .GetComponentsInChildren<PatchForAvatarPoseSystem>())
                     {
                         Object.DestroyImmediate(component);
                     }
