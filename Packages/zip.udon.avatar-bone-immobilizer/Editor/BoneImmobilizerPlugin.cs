@@ -27,8 +27,8 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor
                     ctx =>
                     {
                         CreateImmobilizeBonesDataPass.Run(ctx.AvatarRootTransform,
-                            ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBones>());
-                        foreach (var component in ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBones>())
+                            ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBones>(true));
+                        foreach (var component in ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBones>(true))
                         {
                             Object.DestroyImmediate(component);
                         }
@@ -40,22 +40,22 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor
                     ctx =>
                     {
                         GenerateAssetsPass.Run(ctx.AvatarRootTransform,
-                            ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBonesData>());
+                            ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBonesData>(true));
                     });
             InPhase(BuildPhase.Transforming)
                 .BeforePlugin("nadena.dev.modular-avatar")
                 .Run("Attach dummy bones and update animation clips", ctx =>
                 {
                     var globalDisableData =
-                        ctx.AvatarRootObject.GetComponentInChildren<GlobalDisableData>();
+                        ctx.AvatarRootObject.GetComponentInChildren<GlobalDisableData>(true);
                     RebaseTargetBonesToPatchAvatarPoseSystemPass.Run(ctx.AvatarRootTransform,
-                        ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBonesData>(),
+                        ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBonesData>(true),
                         globalDisableData);
                     ApplyChangesPass.Run(ctx.AvatarRootTransform,
-                        ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBonesData>(),
+                        ctx.AvatarRootObject.GetComponentsInChildren<ImmobilizeBonesData>(true),
                         globalDisableData);
                     foreach (var dataComponent in ctx.AvatarRootObject
-                                 .GetComponentsInChildren<ImmobilizeBonesData>())
+                                 .GetComponentsInChildren<ImmobilizeBonesData>(true))
                     {
                         Object.DestroyImmediate(dataComponent);
                     }
@@ -70,9 +70,9 @@ namespace Tatamo.AvatarBoneImmobilizer.Editor
                 .Run("Patch for AvatarPoseSystem compatibility", ctx =>
                 {
                     RebaseAnimationsPathToPatchAvatarPoseSystemPass.Run(ctx.AvatarRootTransform,
-                        ctx.AvatarRootObject.GetComponentsInChildren<PatchForAvatarPoseSystem>());
+                        ctx.AvatarRootObject.GetComponentsInChildren<PatchForAvatarPoseSystem>(true));
                     foreach (var component in ctx.AvatarRootObject
-                                 .GetComponentsInChildren<PatchForAvatarPoseSystem>())
+                                 .GetComponentsInChildren<PatchForAvatarPoseSystem>(true))
                     {
                         Object.DestroyImmediate(component);
                     }

@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fix avatar build error when the GameObject with `ImmobilizeBones` is disabled and AvatarPoseSystem is present on the avatar.
+
 ### Changed
 
 ### Removed
