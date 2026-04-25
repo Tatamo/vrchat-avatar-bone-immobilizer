@@ -11,6 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+### Changed
+
+### Removed
+
+## [1.1.3] - 2026-04-26
+
+### Added
+
+### Fixed
+
 - Fix avatar build error when the GameObject with `ImmobilizeBones` is disabled and AvatarPoseSystem is present on the avatar.
 
 ### Changed
@@ -94,6 +104,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial Implementations.
 
+[1.1.3]: https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/compare/1.1.2...1.1.3
 [1.1.2]: https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/compare/1.1.1...1.1.2
 [1.1.1]: https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/Tatamo/vrchat-avatar-bone-immobilizer/compare/1.0.1...1.1.0
